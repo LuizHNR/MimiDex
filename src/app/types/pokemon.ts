@@ -19,7 +19,20 @@ export interface PokemonListItem {
 
 // Tipo completo (para getPokemonById)
 export interface PokemonDetails extends PokemonListItem {
-  habilidades?: string[];
-  altura?: number;
-  peso?: number;
+  descricao?: string;
+  habilidades?: PokemonHabilidade[];
+  altura?: string;
+  peso?: string;
+  stats: PokemonStat[];
+}
+
+
+export interface PokemonHabilidade {
+  nome: string;
+  descricao: string;
+}
+
+export interface PokemonStat {
+  nome: string;
+  valor: number;
 }
