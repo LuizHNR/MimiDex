@@ -1,4 +1,4 @@
-import { PokemonListItem } from "@/app/types/pokemon";
+import { PokemonListItem } from "@/app/types/Pokemon/pokemon";
 import PokemonCard from "./PokemonCard";
 
 interface PokemonListProps {

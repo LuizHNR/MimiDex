@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import PokemonList from "./components/PokemonList";
 import { getPokemonPage } from "@/services/pokemonApi";
-import Spinner from "./components/Spinner";
-import type { PokemonListItem } from "@/app/types/pokemon";
+import Spinner from "./components/loading/Spinner";
+import type { PokemonListItem } from "@/app/types/Pokemon/pokemon";
 
 export default function Home() {
   const [data, setData] = useState<PokemonListItem[]>([]);

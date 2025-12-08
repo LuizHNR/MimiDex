@@ -1,19 +1,16 @@
+"use client";
 
 import Image from "next/image";
 import LogoMimi from "@/Images/Logo/Mimi.png"
 import Link from "next/link";
 
-export default function HeaderPokemon() {
-
-
+export default function PokemonHeader({ color }: { color: string }) {
   return (
-    <header className="flex bg-black text-white justify-between text-2xl items-center px-10 py-8 phone:max-md:p-0 phone:max-md:flex-wrap">
-
+    <header className={`${color} text-white p-4 shadow-md transition-colors duration-500`}>
       <Link href="/">
         <h2>Mimidex</h2>
         <Image src={LogoMimi} alt="mimi-logo" />
       </Link>
-
     </header>
   );
 }
