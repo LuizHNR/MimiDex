@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
+import HeaderFooterController from "@/app/components/HeaderFooterController";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -15,17 +14,13 @@ export const metadata: Metadata = {
   description: "Pokédex personalizada",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br">
       <body className={`${figtree.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
+        <HeaderFooterController>
+          {children}
+        </HeaderFooterController>
       </body>
     </html>
   );
