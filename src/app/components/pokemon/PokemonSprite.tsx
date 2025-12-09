@@ -49,7 +49,7 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
     : sprite.back;
 
   return (
-    <div className="flex flex-col items-end pr-20">
+    <div className="flex flex-col items-center pr-20">
 
       {/* Sprite com animações */}
       <div
