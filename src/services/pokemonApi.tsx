@@ -22,3 +22,13 @@ export async function getPokemonById(id: string | number) {
   return res.json();
 }
 
+
+export async function getMovesPokemonById(id: string | number) {
+  const res = await fetch(`${API_URL}/Pokemon/${id}/Movimentos`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Movimentos não encontrados");
+
+  return res.json();
+}

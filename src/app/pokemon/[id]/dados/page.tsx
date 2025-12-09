@@ -10,12 +10,13 @@ import PokemonFooter from "@/app/components/pokemon/FooterPokemon";
 import PokemonSprite from "@/app/components/pokemon/PokemonSprite";
 
 
-export default async function PokemonPage(props: { params: Promise<{ id: string }> }) {
+
+export default async function DadosPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
 
   const pokemon: PokemonDetails = await getPokemonById(id);
 
-  const tipoPrincipal = pokemon.tipos[0].toLowerCase();
+const tipoPrincipal = pokemon.tipos[0].toLowerCase();
   const bgColor = typeBgColors[tipoPrincipal] ?? "bg-zinc-900";
 
   return (
@@ -41,32 +42,6 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
         />
 
 
-
-        <h1 className="text-3xl font-bold text-white mt-4">{pokemon.nome}</h1>
-        <p className="text-zinc-200">#{pokemon.numero}</p>
-
-        {/* DESCRIÇÃO */}
-        <div className="mt-6">
-          <p className="text-white font-semibold">Descrição</p>
-          <p className="text-zinc-100">{pokemon.descricao}</p>
-        </div>
-
-        {/* TIPOS */}
-        <div className="mt-6">
-          <p className="text-white font-semibold">Tipo(s)</p>
-          <div className="flex gap-2 mt-2">
-            {pokemon.tipos.map((tipo) => (
-              <TypeBadge key={tipo} tipo={tipo} />
-            ))}
-          </div>
-        </div>
-
-        {/* ALTURA E PESO */}
-        <div className="mt-6">
-          <p className="text-white font-semibold">Altura & Peso</p>
-          <p className="text-zinc-100">{pokemon.altura} • {pokemon.peso}</p>
-        </div>
-
         {/* HABILIDADES */}
         <div className="mt-6">
           <p className="text-white font-semibold">Habilidades</p>
@@ -85,6 +60,17 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
           <p className="text-white font-semibold">Egg Groups</p>
           <p className="text-zinc-100 capitalize">{pokemon.eggGroups.join(", ")}</p>
         </div>
+
+
+      <Image src={pokemon.sprite.front_default} alt={pokemon.nome}          
+        width={220}
+        height={220}
+      />
+
+      <Image src={pokemon.sprite.front_shiny} alt={pokemon.nome}          
+        width={220}
+        height={220}
+      />
 
         {/* MULTIPLIERS */}
         <div className="mt-6 space-y-4">
@@ -124,36 +110,6 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
           )}
         </div>
 
-        {/* EVOLUÇÕES */}
-        <div className="mt-10">
-          <p className="text-white font-semibold text-lg">Evoluções</p>
-
-          <div className="flex flex-col gap-6 mt-4">
-            {pokemon.evolucoes.map((ev) => (
-              <a
-                key={ev.numero}
-                href={`/pokemon/${ev.numero}`}
-                className="flex items-center gap-4 bg-white/20 p-3 rounded-lg backdrop-blur-sm transition hover:bg-white/30">
-
-                <Image
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ev.numero}.png`}
-                  alt={ev.nome}
-                  width={60}
-                  height={60}
-                />
-
-                <div>
-                  <p className="text-white font-bold">{ev.nome}</p>
-                  {ev.nivelParaEvoluir && (
-                    <p className="text-zinc-200 text-sm">
-                      Evolui no nível {ev.nivelParaEvoluir}
-                    </p>
-                  )}
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
 
         {/* STATS */}
         <div className="mt-10">
