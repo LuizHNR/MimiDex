@@ -23,8 +23,19 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
 
   // cria o audio uma única vez
   useEffect(() => {
-    audioRef.current = new Audio(cryUrl);
-  }, [cryUrl]);
+  if (!cryUrl) return;
+
+  const audio = new Audio();
+  audio.src = cryUrl;
+
+  // aguarda o navegador realmente carregar a fonte
+  audio.addEventListener("canplaythrough", () => {
+    audioRef.current = audio;
+  });
+
+  audio.load();
+}, [cryUrl]);
+
 
   function handleClick() {
     setIsFront((prev) => !prev);
@@ -34,10 +45,14 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
     setTimeout(() => setShake(false), 500);
 
     // play cry
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    }
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.currentTime = 0;
+
+    audio.play().catch((err) => {
+      console.warn("Erro ao tocar áudio:", err);
+    });
   }
 
   const currentSprite = isShiny

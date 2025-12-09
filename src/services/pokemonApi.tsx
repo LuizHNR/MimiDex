@@ -17,9 +17,10 @@ export async function getPokemonById(id: string | number) {
     cache: "no-store",
   });
 
-  if (!res.ok) throw new Error("Pokémon não encontrado");
+  if (!res.ok) return null; // ← retorna null em vez de explodir a página
 
   return res.json();
+
 }
 
 

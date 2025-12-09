@@ -1,6 +1,7 @@
 import { getPokemonById } from "@/services/pokemonApi";
 import type { PokemonDetails } from "@/app/types/Pokemon/pokemon";
 import Image from "next/image";
+import Link from "next/link";
 import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
 
@@ -14,6 +15,26 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
   const { id } = await props.params;
 
   const pokemon: PokemonDetails = await getPokemonById(id);
+
+  if (!pokemon) {
+    return (
+      <div className="text-white h-screen flex items-center justify-center">
+
+       <nav className="flex gap-4 text-white font-semibold">
+          <Link href="/">
+            <button
+              className="px-4 py-1 rounded-lg text-white font-semibold shadow-md active:scale-95 transition">
+              Voltar
+            </button>
+          </Link>
+        </nav>
+
+        <p className="text-xl opacity-80">
+          Este Pokémon ainda não foi cadastrado na Pokédex!
+        </p>
+      </div>
+    );
+  }
 
   const tipoPrincipal = pokemon.tipos[0].toLowerCase();
   const bgColor = typeBgColors[tipoPrincipal] ?? "bg-zinc-900";
