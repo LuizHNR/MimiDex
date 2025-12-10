@@ -21,6 +21,14 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
   const [shake, setShake] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const shinyAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const shinySound = new Audio("/sounds/shiny.wav");
+    shinyAudioRef.current = shinySound;
+  }, []);
+
+
   // cria o audio uma única vez
   useEffect(() => {
   if (!cryUrl) return;
@@ -55,6 +63,20 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
     });
   }
 
+
+  function handleToggleShiny() {
+    setIsShiny(prev => !prev);
+
+    const audio = shinyAudioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    }
+  }
+
+
+
+
   const currentSprite = isShiny
     ? isFront
       ? sprite.front_shiny
@@ -86,6 +108,7 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
               alt={nome}
               width={300}
               height={300}
+              className="pixelated"
             />
           </motion.div>
         </AnimatePresence>
@@ -94,7 +117,7 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
 
       {/* Toggle Shiny */}
       <button
-        onClick={() => setIsShiny((prev) => !prev)}
+        onClick={handleToggleShiny}
         className="px-4 py-1 rounded-lg text-black font-semibold shadow-md active:scale-95 transition">
         {isShiny ? "✨ Shiny" : "★ Normal"}
       </button>

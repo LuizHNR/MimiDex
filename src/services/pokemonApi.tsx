@@ -33,3 +33,26 @@ export async function getMovesPokemonById(id: string | number) {
 
   return res.json();
 }
+
+
+
+export async function getItemPage() {
+  const res = await fetch(`${API_URL}/Item`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Erro ao carregar Item");
+
+  return res.json(); // deve retornar { totalItems, items }
+}
+
+
+export async function getItemById(id: string | number) {
+  const res = await fetch(`${API_URL}/Item/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Item não encontrado");
+
+  return res.json();
+}

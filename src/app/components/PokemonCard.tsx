@@ -18,6 +18,7 @@ export default function PokemonCard({ numero, nome, sprite, tipos }: PokemonCard
           alt={nome}
           width={120}
           height={120}
+          className="pixelated"
         />
       )}
 
