@@ -5,7 +5,7 @@ export function TypeBadge({ tipo }: { tipo: string }) {
 
   return (
     <span
-      className={`${color} text-black px-3 py-1 rounded-full text-sm font-semibold capitalize`}
+      className={`${color} text-white px-3 py-1 rounded-full text-sm font-semibold capitalize`}
     >
       {tipo}
     </span>

@@ -1,7 +1,6 @@
 import { getPokemonById } from "@/services/pokemonApi";
 import type { PokemonDetails } from "@/app/types/Pokemon/pokemon";
 import Image from "next/image";
-import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
 
 import PokemonHeader from "@/app/components/pokemon/HeaderPokemon";

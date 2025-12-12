@@ -1,6 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
+import { typeBgColors } from "@/utils/typeBgColors";
+
 interface PokemonCardProps {
   numero: number;
   nome: string;
@@ -9,9 +12,14 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ numero, nome, sprite, tipos }: PokemonCardProps) {
+
+  const tipoPrincipal = tipos[0].toLowerCase();
+  const bgColor = typeBgColors[tipoPrincipal] ?? "bg-zinc-900";
+
+
   return (
     <Link href={`/pokemon/${numero}`} className="cursor-pointer">
-      <div className="bg-zinc-900 text-white p-4 rounded-xl flex flex-col items-center gap-2 w-40 hover:scale-[1.03] transition">
+      <div className={`${bgColor} text-white p-4 rounded-xl flex flex-col items-center gap-2 w-40 hover:scale-[1.03] transition`}>
         {sprite && (
         <Image
           src={sprite}
@@ -25,13 +33,11 @@ export default function PokemonCard({ numero, nome, sprite, tipos }: PokemonCard
 
         <h2 className="text-lg font-bold">{nome}</h2>
 
-        <p className="text-sm text-zinc-400">#{numero}</p>
+        <p className="text-sm text-white">#{numero}</p>
 
         <div className="flex gap-2">
           {tipos.map((t) => (
-            <span key={t} className="text-xs px-2 py-1 bg-zinc-700 rounded-md">
-              {t}
-            </span>
+            <TypeBadge key={t} tipo={t} />
           ))}
         </div>
       </div>
