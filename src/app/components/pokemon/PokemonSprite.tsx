@@ -19,80 +19,80 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
   const [isFront, setIsFront] = useState(true);
   const [isShiny, setIsShiny] = useState(false);
   const [shake, setShake] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const shinyAudioRef = useRef<HTMLAudioElement | null>(null);
 
+  /* shiny sound */
   useEffect(() => {
-    const shinySound = new Audio("/sounds/shiny.wav");
-    shinyAudioRef.current = shinySound;
+    shinyAudioRef.current = new Audio("/sounds/shiny.wav");
   }, []);
 
-
-  // cria o audio uma única vez
+  /* cry */
   useEffect(() => {
-  if (!cryUrl) return;
+    if (!cryUrl) return;
 
-  const audio = new Audio();
-  audio.src = cryUrl;
-
-  // aguarda o navegador realmente carregar a fonte
-  audio.addEventListener("canplaythrough", () => {
+    const audio = new Audio(cryUrl);
     audioRef.current = audio;
-  });
+  }, [cryUrl]);
 
-  audio.load();
-}, [cryUrl]);
-
+  /* 🔐 verifica se existe back */
+  const hasBack =
+    !!sprite.back?.trim() || !!sprite.back_shiny?.trim();
 
   function handleClick() {
-    setIsFront((prev) => !prev);
+    // 🚫 NÃO vira se não existir back
+    if (!isFront && !hasBack) return;
 
-    // shake animation
+    if (isFront && !hasBack) {
+      // ainda toca o grito e anima
+      playCry();
+      triggerShake();
+      return;
+    }
+
+    setIsFront((prev) => !prev);
+    triggerShake();
+    playCry();
+  }
+
+  function triggerShake() {
     setShake(true);
     setTimeout(() => setShake(false), 500);
+  }
 
-    // play cry
+  function playCry() {
     const audio = audioRef.current;
     if (!audio) return;
 
     audio.currentTime = 0;
-
-    audio.play().catch((err) => {
-      console.warn("Erro ao tocar áudio:", err);
-    });
+    audio.play().catch(() => {});
   }
-
 
   function handleToggleShiny() {
-    setIsShiny(prev => !prev);
+    setIsShiny((prev) => !prev);
 
-    const audio = shinyAudioRef.current;
-    if (audio) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    }
+    shinyAudioRef.current?.play().catch(() => {});
   }
 
+  /* 🔒 garante sprite válido */
+  const currentSprite =
+    isShiny
+      ? isFront
+        ? sprite.front_shiny || sprite.front
+        : sprite.back_shiny || sprite.front_shiny || sprite.front
+      : isFront
+      ? sprite.front
+      : sprite.back || sprite.front;
 
-
-
-  const currentSprite = isShiny
-    ? isFront
-      ? sprite.front_shiny
-      : sprite.back_shiny
-    : isFront
-    ? sprite.front
-    : sprite.back;
+  // segurança final
+  if (!currentSprite) return null;
 
   return (
     <div className="flex flex-col items-center pr-20">
-
-      {/* Sprite com animações */}
+      {/* Sprite */}
       <div
-        className={`cursor-pointer ${
-          shake ? "animate-shake" : ""
-        }`}
+        className={`cursor-pointer ${shake ? "animate-shake" : ""}`}
         onClick={handleClick}
       >
         <AnimatePresence mode="wait">
@@ -114,11 +114,11 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
         </AnimatePresence>
       </div>
 
-
       {/* Toggle Shiny */}
       <button
         onClick={handleToggleShiny}
-        className="px-4 py-1 rounded-lg text-black font-semibold shadow-md active:scale-95 transition">
+        className="px-4 py-1 rounded-lg text-black font-semibold shadow-md active:scale-95 transition"
+      >
         {isShiny ? "✨ Shiny" : "★ Normal"}
       </button>
     </div>
