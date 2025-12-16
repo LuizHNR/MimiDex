@@ -113,6 +113,8 @@ const tipoPrincipal = pokemon.tipos[0].toLowerCase();
         {/* STATS */}
         <div className="mt-10">
           <p className="text-white font-semibold text-lg">Stats</p>
+          <p>Status Base:</p>
+          <p>{pokemon.baseStatus}</p>
 
           <div className="mt-4 space-y-3">
             {pokemon.stats.map((stat) => (

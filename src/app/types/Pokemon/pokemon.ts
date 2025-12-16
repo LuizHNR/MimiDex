@@ -49,6 +49,7 @@ export interface PokemonDetails extends PokemonListItem {
   eggGroups: string[];
   multipliers: Multipliers;
   evolucoes: PokemonEvolucao[];
+  baseStatus: number;
   stats: PokemonStat[];
 }
 

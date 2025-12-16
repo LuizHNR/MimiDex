@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
 import PokemonList from "./components/PokemonList";
-import { getPokemonPage } from "@/services/pokemonApi";
-import Spinner from "./components/loading/Spinner";
-import type { PokemonListItem } from "@/app/types/Pokemon/pokemon";
-
 import AdvancedFilter from "./components/AdvancedFilter";
+import Spinner from "./components/loading/Spinner";
 
+import { getPokemonPage } from "@/services/pokemonApi";
+import type { PokemonListItem } from "@/app/types/Pokemon/pokemon";
 
 // ─────────────────────────────────────────────
 // TYPES
@@ -34,32 +35,57 @@ function useDebounce<T>(value: T, delay = 300) {
 }
 
 export default function Home() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const observerRef = useRef<HTMLDivElement | null>(null);
+
+  // ─────────────────────────────────────────────
+  // FILTROS 
+  // ─────────────────────────────────────────────
+  const [filters, setFilters] = useState<PokemonFilters>(() => ({
+    search: searchParams.get("search") ?? "",
+    generations: searchParams.get("gen")
+      ? searchParams.get("gen")!.split(",").map(Number)
+      : [],
+    types: searchParams.get("types")
+      ? searchParams.get("types")!.split(",")
+      : [],
+    order: searchParams.get("order"),
+  }));
+
+  const debouncedSearch = useDebounce(filters.search);
+
+  const searchFinal =
+    debouncedSearch.trim() === "" ? undefined : debouncedSearch;
+
+  // ─────────────────────────────────────────────
+  // LISTAGEM
+  // ─────────────────────────────────────────────
   const [pokemons, setPokemons] = useState<PokemonListItem[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const observerRef = useRef<HTMLDivElement | null>(null);
+  // ─────────────────────────────────────────────
+  // SINCRONIZA FILTROS → URL
+  // ─────────────────────────────────────────────
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (filters.search) params.set("search", filters.search);
+    if (filters.generations.length)
+      params.set("gen", filters.generations.join(","));
+    if (filters.types.length)
+      params.set("types", filters.types.join(","));
+    if (filters.order) params.set("order", filters.order);
+
+    router.replace(`?${params.toString()}`, { scroll: false });
+  }, [filters, router]);
 
   // ─────────────────────────────────────────────
-  // FILTROS
-  // ─────────────────────────────────────────────
-  const [filters, setFilters] = useState<PokemonFilters>({
-    search: "",
-    generations: [],
-    types: [],
-    order: null,
-  });
-
-  const debouncedSearch = useDebounce(filters.search);
-
-  // ✅ search final (não envia string vazia)
-  const searchFinal =
-    debouncedSearch.trim() === "" ? undefined : debouncedSearch;
-
-  // ─────────────────────────────────────────────
-  // RESET QUANDO FILTROS "REAIS" MUDAM
+  // RESET QUANDO FILTROS REAIS MUDAM
   // ─────────────────────────────────────────────
   useEffect(() => {
     setPage(1);
@@ -137,7 +163,7 @@ export default function Home() {
 
   return (
     <main className="text-white bg-black p-12">
-      {/* BARRA DE BUSCA */}
+      {/* BUSCA */}
       <input
         type="text"
         placeholder="Buscar Pokémon..."
@@ -148,6 +174,7 @@ export default function Home() {
         className="mb-6 w-full max-w-md rounded px-4 py-2 bg-emerald-100 text-black"
       />
 
+      {/* FILTRO AVANÇADO */}
       <AdvancedFilter
         filters={{
           generations: filters.generations,
@@ -158,7 +185,6 @@ export default function Home() {
           setFilters(prev => ({ ...prev, ...newFilters }))
         }
       />
-
 
       <PokemonList items={pokemons} />
 
