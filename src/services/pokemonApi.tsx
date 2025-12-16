@@ -1,9 +1,25 @@
-
 const API_URL = "http://localhost:5194/api/v2";
 
-export async function getPokemonPage(page = 1, pageSize = 50) {
+export async function getPokemonPage({page,pageSize,search,gen,types,order,}: {
+  page: number;
+  pageSize: number;
+  search?: string;
+  gen?: string;
+  types?: string;
+  order?: string | null;
+}) {
+  const params = new URLSearchParams({
+    page: String(page),
+    pageSize: String(pageSize),
+  });
+
+  if (search) params.append("search", search);
+  if (gen) params.append("gen", gen);
+  if (types) params.append("types", types);
+  if (order) params.append("order", order);
+
   const res = await fetch(
-    `${API_URL}/Pokemon?page=${page}&pageSize=${pageSize}`,
+    `${API_URL}/Pokemon?${params.toString()}`,
     { cache: "no-store" }
   );
 
@@ -11,6 +27,7 @@ export async function getPokemonPage(page = 1, pageSize = 50) {
 
   return res.json();
 }
+
 
 
 

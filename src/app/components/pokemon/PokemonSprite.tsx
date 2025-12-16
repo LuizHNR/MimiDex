@@ -36,16 +36,14 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
     audioRef.current = audio;
   }, [cryUrl]);
 
-  /* 🔐 verifica se existe back */
+  /* verifica se existe back */
   const hasBack =
     !!sprite.back?.trim() || !!sprite.back_shiny?.trim();
 
   function handleClick() {
-    // 🚫 NÃO vira se não existir back
     if (!isFront && !hasBack) return;
 
     if (isFront && !hasBack) {
-      // ainda toca o grito e anima
       playCry();
       triggerShake();
       return;
@@ -75,7 +73,7 @@ export default function PokemonSprite({ sprite, cryUrl, nome }: Props) {
     shinyAudioRef.current?.play().catch(() => {});
   }
 
-  /* 🔒 garante sprite válido */
+  /* garante sprite válido */
   const currentSprite =
     isShiny
       ? isFront

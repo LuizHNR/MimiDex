@@ -51,3 +51,5 @@ export interface PokemonDetails extends PokemonListItem {
   evolucoes: PokemonEvolucao[];
   stats: PokemonStat[];
 }
+
+
