@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
+import EvolutionChain from "@/app/components/pokemon/EvolutionChain";
+import PokemonForms from "@/app/components/pokemon/PokemonForms";
+
 
 import PokemonHeader from "@/app/components/pokemon/HeaderPokemon";
 import PokemonFooter from "@/app/components/pokemon/FooterPokemon";
@@ -38,6 +41,7 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
 
   const tipoPrincipal = pokemon.tipos[0].toLowerCase();
   const bgColor = typeBgColors[tipoPrincipal] ?? "bg-zinc-900";
+  
 
   return (
     <main className={`${bgColor} min-h-screen transition-colors duration-500`}>
@@ -94,30 +98,41 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
         <div className="mt-10">
           <p className="text-white font-semibold text-lg">Evoluções</p>
 
+          <div className="mt-10">
+            <p className="text-white font-semibold text-lg">Evoluções</p>
+            <EvolutionChain evolucoes={pokemon.evolucoes} />
+          </div>
+
+        </div>
+
+
+        {/* FORMAS */}
+        <div className="mt-10">
+          <p className="text-white font-semibold text-lg">Formas</p>
+
           <div className="flex flex-col gap-6 mt-4">
-            {pokemon.evolucoes.map((ev) => (
-              <a
-                key={ev.numero}
-                href={`/pokemon/${ev.numero}`}
-                className="flex items-center gap-4 bg-white/20 p-3 rounded-lg backdrop-blur-sm transition hover:bg-white/30">
+            {pokemon.formas
+              .filter((fm) => fm.sprite?.front_default) // 🔥 remove quem não tem imagem
+              .map((fm) => (
+                <a
+                  key={fm.numero}
+                  href={`/pokemon/${fm.numero}`}
+                  className="flex items-center gap-4 bg-white/20 p-3 rounded-lg backdrop-blur-sm transition hover:bg-white/30"
+                >
+                  <Image
+                    src={fm.sprite.front_default}
+                    alt={fm.nome}
+                    width={60}
+                    height={60}
+                    className="pixelated"
+                  />
 
-                <Image
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${ev.numero}.png`}
-                  alt={ev.nome}
-                  width={60}
-                  height={60}
-                />
-
-                <div>
-                  <p className="text-white font-bold">{ev.nome}</p>
-                  {ev.nivelParaEvoluir && (
-                    <p className="text-zinc-200 text-sm">
-                      Evolui no nível {ev.nivelParaEvoluir}
-                    </p>
-                  )}
-                </div>
-              </a>
+                  <div>
+                    <p className="text-white font-bold">{fm.nome}</p>
+                  </div>
+                </a>
             ))}
+
           </div>
         </div>
 

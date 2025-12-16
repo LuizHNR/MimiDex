@@ -64,11 +64,13 @@ const tipoPrincipal = pokemon.tipos[0].toLowerCase();
       <Image src={pokemon.sprite.front_default} alt={pokemon.nome}          
         width={220}
         height={220}
+        className="pixelated"
       />
 
       <Image src={pokemon.sprite.front_shiny} alt={pokemon.nome}          
         width={220}
         height={220}
+        className="pixelated"
       />
 
         {/* MULTIPLIERS */}

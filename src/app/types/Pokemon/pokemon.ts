@@ -35,10 +35,13 @@ export interface PokemonEvolucao {
   numero: number;
   nome: string;
   nivelParaEvoluir: number | null;
+  metodo?: string | null;
+  detalhe?: string | null;
   links: {
     self: string;
   };
 }
+
 
 export interface PokemonDetails extends PokemonListItem {
   descricao: string;
@@ -51,6 +54,11 @@ export interface PokemonDetails extends PokemonListItem {
   evolucoes: PokemonEvolucao[];
   baseStatus: number;
   stats: PokemonStat[];
+  formas: PokemonFormas[];
+}
+
+export interface PokemonFormas extends PokemonListItem {
+  baseStatus: number;
 }
 
 
