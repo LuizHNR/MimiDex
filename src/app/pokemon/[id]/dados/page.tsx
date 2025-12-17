@@ -3,10 +3,10 @@ import type { PokemonDetails } from "@/app/types/Pokemon/pokemon";
 import Image from "next/image";
 import { typeBgColors } from "@/utils/typeBgColors";
 
-import PokemonHeader from "@/app/components/pokemon/HeaderPokemon";
-import PokemonFooter from "@/app/components/pokemon/FooterPokemon";
+import PokemonHeader from "@/components/pokemon/HeaderPokemon";
+import PokemonFooter from "@/components/pokemon/FooterPokemon";
 
-import PokemonSprite from "@/app/components/pokemon/PokemonSprite";
+import PokemonSprite from "@/components/pokemon/PokemonSprite";
 
 
 

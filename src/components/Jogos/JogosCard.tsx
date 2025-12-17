@@ -1,20 +1,25 @@
+import Link from "next/link";
+
 interface JogosCardProps {
+  id: number;
   nome: string;
   geracao: string;
   pokedexes?: string[];
   regioes?: string[];
-  vercoes?: string[];
+  versoes?: string[];
 }
 
 export default function JogosCard({
+  id,
   nome,
   geracao,
   pokedexes = [],
   regioes = [],
-  vercoes = [],
+  versoes = [],
 }: JogosCardProps) {
+
   return (
-    <div
+    <Link href={`/Jogos/${id}`}
       className="
         w-full
         bg-zinc-900/90 border border-zinc-800
@@ -87,17 +92,17 @@ export default function JogosCard({
         )}
 
         {/* VERSÕES */}
-        {vercoes.length > 0 && (
+        {versoes.length > 0 && (
           <p className="text-xs text-zinc-400">
-            {vercoes.slice(0, 4).join(", ")}
-            {vercoes.length > 4 && (
+            {versoes.slice(0, 4).join(", ")}
+            {versoes.length > 4 && (
               <span className="text-zinc-500">
-                {" "}+{vercoes.length - 4}
+                {" "}+{versoes.length - 4}
               </span>
             )}
           </p>
         )}
       </div>
-    </div>
+    </Link>
   );
 }

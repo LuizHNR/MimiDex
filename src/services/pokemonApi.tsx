@@ -109,3 +109,14 @@ export async function getJogos() {
 
   return res.json();
 }
+
+
+export async function getJogoById(id: string | number) {
+  const res = await fetch(`${API_URL}/VersionGroup/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Item não encontrado");
+
+  return res.json();
+}

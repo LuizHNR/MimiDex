@@ -21,14 +21,15 @@ export default function JogosList({ items }: { items: JogoList[] }) {
 
   return (
     <div className="flex flex-col gap-4 py-10">
-      {jogosComRegiao.map((jogo, index) => (
+      {jogosComRegiao.map((jogo) => (
         <JogosCard
-          key={index}
+          key={jogo.id}
+          id={jogo.id}
           nome={jogo.nome}
           geracao={jogo.geracao}
           pokedexes={jogo.pokedexes}
           regioes={jogo.regioes}
-          vercoes={jogo.vercoes}
+          versoes={jogo.versoes}
         />
       ))}
     </div>

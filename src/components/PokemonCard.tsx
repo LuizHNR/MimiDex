@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
+import { TypeBadge } from "@/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
 
 interface PokemonCardProps {

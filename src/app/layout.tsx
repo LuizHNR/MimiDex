@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
-import HeaderFooterController from "@/app/components/HeaderFooterController";
+import HeaderFooterController from "@/components/HeaderFooterController";
 
 const figtree = Figtree({
   subsets: ["latin"],

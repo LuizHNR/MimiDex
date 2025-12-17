@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import JogosList from "../components/Jogos/JogosList";
+import JogosList from "@/components/Jogos/JogosList";
 import { getJogos } from "@/services/pokemonApi";
-import Spinner from "../components/loading/Spinner";
+import Spinner from "@/components/loading/Spinner";
 import type { JogoList } from "@/app/types/Jogos/Jogo";
 
 export default function JogosPage() {

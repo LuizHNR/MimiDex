@@ -3,9 +3,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-import PokemonList from "./components/PokemonList";
-import AdvancedFilter from "./components/AdvancedFilter";
-import Spinner from "./components/loading/Spinner";
+import PokemonList from "../components/PokemonList";
+import AdvancedFilter from "../components/AdvancedFilter";
+import Spinner from "../components/loading/Spinner";
 
 import { getPokemonPage } from "@/services/pokemonApi";
 import type { PokemonListItem } from "@/app/types/Pokemon/pokemon";

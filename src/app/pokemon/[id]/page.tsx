@@ -2,16 +2,15 @@ import { getPokemonById } from "@/services/pokemonApi";
 import type { PokemonDetails } from "@/app/types/Pokemon/pokemon";
 import Image from "next/image";
 import Link from "next/link";
-import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
+import { TypeBadge } from "@/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
-import EvolutionChain from "@/app/components/pokemon/EvolutionChain";
-import PokemonForms from "@/app/components/pokemon/PokemonForms";
+import EvolutionChain from "@/components/pokemon/EvolutionChain";
 
 
-import PokemonHeader from "@/app/components/pokemon/HeaderPokemon";
-import PokemonFooter from "@/app/components/pokemon/FooterPokemon";
+import PokemonHeader from "@/components/pokemon/HeaderPokemon";
+import PokemonFooter from "@/components/pokemon/FooterPokemon";
 
-import PokemonSprite from "@/app/components/pokemon/PokemonSprite";
+import PokemonSprite from "@/components/pokemon/PokemonSprite";
 
 
 export default async function PokemonPage(props: { params: Promise<{ id: string }> }) {

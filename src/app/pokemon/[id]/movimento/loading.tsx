@@ -1,4 +1,4 @@
-import Spinner from "@/app/components/loading/Spinner"
+import Spinner from "@/components/loading/Spinner"
 
 export default function LoadingMovimentos() {
   return (

@@ -2,14 +2,14 @@ import { getPokemonById, getMovesPokemonById } from "@/services/pokemonApi";
 import type { PokemonDetails } from "@/app/types/Pokemon/pokemon";
 import type { PokemonMoves } from "@/app/types/Moves/move";
 
-import PokemonHeader from "@/app/components/pokemon/HeaderPokemon";
-import PokemonFooter from "@/app/components/pokemon/FooterPokemon";
-import { TypeBadge } from "@/app/components/pokemon/TypeBadge";
+import PokemonHeader from "@/components/pokemon/HeaderPokemon";
+import PokemonFooter from "@/components/pokemon/FooterPokemon";
+import { TypeBadge } from "@/components/pokemon/TypeBadge";
 import { typeBgColors } from "@/utils/typeBgColors";
 
-import { MoveGroup } from "@/app/components/pokemon/MoveGroup";
+import { MoveGroup } from "@/components/pokemon/MoveGroup";
 
-import PokemonSprite from "@/app/components/pokemon/PokemonSprite";
+import PokemonSprite from "@/components/pokemon/PokemonSprite";
 
 export default async function MovimentosPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
