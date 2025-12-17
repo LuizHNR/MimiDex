@@ -36,7 +36,7 @@ export async function getPokemonById(id: string | number) {
     cache: "no-store",
   });
 
-  if (!res.ok) return null; // ← retorna null em vez de explodir a página
+  if (!res.ok) return null; 
 
   return res.json();
 
@@ -55,14 +55,27 @@ export async function getMovesPokemonById(id: string | number) {
 
 
 
-export async function getItemPage() {
-  const res = await fetch(`${API_URL}/Item`, {
-    cache: "no-store",
+export async function getItemPage({page,pageSize,search}: {
+  page: number;
+  pageSize: number;
+  search?: string;
+
+}) {
+  const params = new URLSearchParams({
+    page: String(page),
+    pageSize: String(pageSize),
   });
 
-  if (!res.ok) throw new Error("Erro ao carregar Item");
+  if (search) params.append("search", search);
 
-  return res.json(); // deve retornar { totalItems, items }
+  const res = await fetch(
+    `${API_URL}/Item?${params.toString()}`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) return null;
+
+  return res.json();
 }
 
 
