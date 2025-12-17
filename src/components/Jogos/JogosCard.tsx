@@ -19,7 +19,7 @@ export default function JogosCard({
 }: JogosCardProps) {
 
   return (
-    <Link href={`/Jogos/${id}`}
+    <Link href={`/Jogo/${id}`}
       className="
         w-full
         bg-zinc-900/90 border border-zinc-800

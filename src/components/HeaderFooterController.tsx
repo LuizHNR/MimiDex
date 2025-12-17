@@ -5,29 +5,31 @@ import { useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 
+const NO_LAYOUT_ROUTES = [
+  "/pokemon",
+  "/Jogo",
+];
+
 export default function HeaderFooterController({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isPokemonRoute = pathname.startsWith("/pokemon");
+
+  const isNoLayoutRoute = NO_LAYOUT_ROUTES.some(route =>
+    pathname.startsWith(route)
+  );
 
   useEffect(() => {
-    if (isPokemonRoute) {
-      // Forçar o scroll normal
-      document.body.style.overflow = "auto";
-    } else {
-      // Garantir que o overflow seja adequado
-      document.body.style.overflow = "";
-    }
-  }, [isPokemonRoute]);
+    document.body.style.overflow = isNoLayoutRoute ? "auto" : "";
+  }, [isNoLayoutRoute]);
 
   return (
     <>
-      {!isPokemonRoute && <Header />}
+      {!isNoLayoutRoute && <Header />}
       {children}
-      {!isPokemonRoute && <Footer />}
+      {!isNoLayoutRoute && <Footer />}
     </>
   );
 }
