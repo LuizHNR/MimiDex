@@ -18,7 +18,7 @@ export default function Header() {
         <Link href={`/`} className="hover:underline">Pokemon</Link>
         <Link href={`/`} className="hover:underline">Usuario</Link>
         <Link href={`/`} className="hover:underline">Time</Link>
-        <Link href={`/`} className="hover:underline">Regiao</Link>
+        <Link href={`/Jogos`} className="hover:underline">Jogos</Link>
         <Link href={`/Itens`} className="hover:underline">Itens</Link>
         <Link href={`/`} className="hover:underline">Natures</Link>
       </nav>

@@ -1,5 +1,9 @@
 const API_URL = "http://localhost:5194/api/v2";
 
+//------------------------------
+// Pokemon
+//------------------------------
+
 export async function getPokemonPage({page,pageSize,search,gen,types,order,}: {
   page: number;
   pageSize: number;
@@ -54,7 +58,9 @@ export async function getMovesPokemonById(id: string | number) {
 }
 
 
-
+//------------------------------
+// Itens
+//------------------------------
 export async function getItemPage({page,pageSize,search}: {
   page: number;
   pageSize: number;
@@ -85,6 +91,21 @@ export async function getItemById(id: string | number) {
   });
 
   if (!res.ok) throw new Error("Item não encontrado");
+
+  return res.json();
+}
+
+
+//------------------------------
+// Jogos
+//------------------------------
+export async function getJogos() {
+  const res = await fetch(
+    `${API_URL}/VersionGroup`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) return null;
 
   return res.json();
 }

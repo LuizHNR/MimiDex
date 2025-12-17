@@ -22,12 +22,12 @@ export default function Footer() {
 
                     <div>
                         <ul>
-                            <li><Link href="/">Home</Link></li>
-                            <li>Usuario</li>
-                            <li>Time</li>
-                            <li>Regiões</li>
-                            <li>Itens</li>
-                            <li>Natures</li>
+                            <Link href={`/`} className="hover:underline">Pokemon</Link>
+                            <Link href={`/`} className="hover:underline">Usuario</Link>
+                            <Link href={`/`} className="hover:underline">Time</Link>
+                            <Link href={`/Jogos`} className="hover:underline">Jogos</Link>
+                            <Link href={`/Itens`} className="hover:underline">Itens</Link>
+                            <Link href={`/`} className="hover:underline">Natures</Link>
                         </ul>
 
                     </div>
