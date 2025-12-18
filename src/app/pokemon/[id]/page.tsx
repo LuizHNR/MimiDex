@@ -111,7 +111,7 @@ export default async function PokemonPage(props: { params: Promise<{ id: string 
 
           <div className="flex flex-col gap-6 mt-4">
             {pokemon.formas
-              .filter((fm) => fm.sprite?.front_default) // 🔥 remove quem não tem imagem
+              .filter((fm) => fm.sprite?.front_default) // remove quem não tem imagem
               .map((fm) => (
                 <a
                   key={fm.numero}

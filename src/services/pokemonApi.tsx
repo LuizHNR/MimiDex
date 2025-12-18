@@ -120,3 +120,17 @@ export async function getJogoById(id: string | number) {
 
   return res.json();
 }
+
+//------------------------------
+// Pokedex
+//------------------------------
+
+export async function getPokedexById(id: string | number) {
+  const res = await fetch(`${API_URL}/Pokedex/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Pokedex não encontrada");
+
+  return res.json();
+}
