@@ -3,6 +3,8 @@ import type { JogoList } from "@/app/types/Jogos/Jogo";
 import Link from "next/link";
 import { TypeBadge } from "@/components/pokemon/TypeBadge";
 
+import  JogoHeader  from "@/components/Jogos/HeaderJogo"
+import  JogoFooter  from "@/components/Jogos/FooterJogo"
 
 export default async function JogoPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
@@ -33,7 +35,8 @@ export default async function JogoPage(props: { params: Promise<{ id: string }> 
   return (
     <main className={`min-h-screen transition-colors duration-500`}>
 
-
+      {/* HEADER DINÂMICO */}
+      <JogoHeader id={id} pokedexes={jogo.pokedexes} regioes={jogo.regioes}/>
 
       <div className="p-4 pb-20">
 
@@ -83,6 +86,8 @@ export default async function JogoPage(props: { params: Promise<{ id: string }> 
 
 
       </div>
+
+      <JogoFooter />
 
     </main>
   );
