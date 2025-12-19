@@ -3,6 +3,7 @@ import type { Pokedex } from "@/app/types/Pokedex/pokedex";
 import Link from "next/link";
 
 import PokedexClient from "@/components/pokedex/PokedexClient";
+import BackButton from "@/components/botao/BackButton";
 
 export default async function JogoPage(
   props: { params: Promise<{ id: string }> }
@@ -22,6 +23,10 @@ export default async function JogoPage(
 
   return (
     <main className="min-h-screen transition-colors duration-500 p-4 pb-20">
+
+      <div className="flex items-center gap-4 mb-4">
+        <BackButton />
+      </div>      
 
       {/* INFO PRINCIPAL */}
       <p className="text-zinc-200">{pokedex.nome}</p>

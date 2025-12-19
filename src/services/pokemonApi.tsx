@@ -145,3 +145,20 @@ export async function getPokedexById(id: string, search?: string) {
   return res.json();
 }
 
+
+
+
+
+//------------------------------
+// Regiao
+//------------------------------
+export async function getRegiaoById(id: string | number) {
+  const res = await fetch(`${API_URL}/Region/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Região não encontrada");
+
+  return res.json();
+}
+

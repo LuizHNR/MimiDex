@@ -3,6 +3,7 @@
 import Image from "next/image";
 import LogoMimi from "@/Images/Logo/Mimi.png";
 import Link from "next/link";
+import BackButton from "../botao/BackButton";
 
 interface JogoHeaderProps {
   id: string;
@@ -16,11 +17,7 @@ export default function JogoHeader({ id, pokedexes, regioes }: JogoHeaderProps) 
     <header className="text-white p-4 shadow-md">
 
       <div className="flex items-center gap-4">
-        <Link href="/">
-          <button className="px-4 py-1 rounded-lg text-white font-semibold">
-            Voltar
-          </button>
-        </Link>
+        <BackButton />
 
         <Link href="/" className="flex items-center gap-2">
           <Image src={LogoMimi} alt="mimi-logo" width={40} />

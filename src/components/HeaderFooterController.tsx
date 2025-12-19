@@ -8,6 +8,9 @@ import Footer from "./Footer";
 const NO_LAYOUT_ROUTES = [
   `/pokemon`,
   `/Jogos/`,
+  `/pokedex`,
+  `/regiao`,
+  `/Itens/detalhe/`,
 ];
 
 export default function HeaderFooterController({

@@ -3,7 +3,8 @@ import type { ListItem } from "@/app/types/Item/item";
 import Image from "next/image";
 import Link from "next/link";
 
-import SpriteItem from "@/app/components/Item/spriteItem";
+import SpriteItem from "@/components/Item/spriteItem";
+import BackButton from "@/components/botao/BackButton";
 
 
 export default async function ItemPage(props: { params: Promise<{ id: string }> }) {
@@ -13,7 +14,12 @@ export default async function ItemPage(props: { params: Promise<{ id: string }> 
 
   if (!item) {
     return (
-      <div className="text-white h-screen flex items-center justify-center">
+      <div className="text-white h-screen flex items-center justify-center"> 
+
+      <div className="flex items-center ">
+        <BackButton />
+
+      </div> 
 
        <nav className="flex gap-4 text-white font-semibold">
           <Link href="/">
@@ -36,6 +42,10 @@ export default async function ItemPage(props: { params: Promise<{ id: string }> 
   return (
     <main className={`min-h-screen transition-colors duration-500`}>
 
+      <div className="flex items-center gap-4 mb-4">
+        <BackButton />
+
+      </div>       
 
       <div className="p-4 pb-20">
 

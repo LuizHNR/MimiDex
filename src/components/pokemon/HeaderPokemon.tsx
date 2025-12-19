@@ -4,18 +4,15 @@ import Image from "next/image";
 import LogoMimi from "@/Images/Logo/Mimi.png"
 import Link from "next/link";
 
+import BackButton from "../botao/BackButton";
+
 export default function PokemonHeader({ color, id }: { color: string, id: string }) {
   return (
     <header className={`${color} text-white p-4 shadow-md transition-colors duration-500`}>
 
       <div>
 
-        <Link href="/">
-          <button
-            className="px-4 py-1 rounded-lg text-black font-semibold shadow-md active:scale-95 transition">
-            Voltar
-          </button>
-        </Link>
+        <BackButton />
 
 
         <Link href="/">
