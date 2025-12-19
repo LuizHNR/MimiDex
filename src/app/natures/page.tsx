@@ -45,7 +45,6 @@ export default async function NaturesPage() {
         </p>
       </div>
 
-      {/* GRID */}
       <div className="grid gap-4">
         {natures.map((nature) => {
           const isNeutral =
