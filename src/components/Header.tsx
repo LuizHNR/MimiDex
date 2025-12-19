@@ -20,7 +20,7 @@ export default function Header() {
         <Link href={`/`} className="hover:underline">Time</Link>
         <Link href={`/Jogos`} className="hover:underline">Jogos</Link>
         <Link href={`/Itens`} className="hover:underline">Itens</Link>
-        <Link href={`/`} className="hover:underline">Natures</Link>
+        <Link href={`/natures`} className="hover:underline">Natures</Link>
       </nav>
 
     </header>

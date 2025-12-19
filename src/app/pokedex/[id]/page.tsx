@@ -35,10 +35,6 @@ export default async function JogoPage(
         {pokedex.nome}
       </h1>
 
-      <p className="text-zinc-300 mt-2">
-        {pokedex.descricao}
-      </p>
-
       {/* CLIENT — usando o id da rota */}
       <PokedexClient id={id} initialData={pokedex} />
 

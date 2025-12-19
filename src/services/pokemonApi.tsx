@@ -162,3 +162,30 @@ export async function getRegiaoById(id: string | number) {
   return res.json();
 }
 
+
+
+//------------------------------
+// Natures
+//------------------------------
+export async function getNatures() {
+  const res = await fetch(
+    `${API_URL}/Nature`,
+    { cache: "no-store" }
+  );
+
+  if (!res.ok) return null;
+
+  return res.json();
+}
+
+
+
+export async function getJNatureById(id: string | number) {
+  const res = await fetch(`${API_URL}/Nature/${id}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) throw new Error("Nature não encontrada");
+
+  return res.json();
+}
