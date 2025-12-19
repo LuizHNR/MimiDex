@@ -1,9 +1,10 @@
 const API_URL = "http://localhost:5194/api/v2";
 
+
+
 //------------------------------
 // Pokemon
 //------------------------------
-
 export async function getPokemonPage({page,pageSize,search,gen,types,order,}: {
   page: number;
   pageSize: number;
@@ -121,16 +122,26 @@ export async function getJogoById(id: string | number) {
   return res.json();
 }
 
+
+
 //------------------------------
 // Pokedex
 //------------------------------
+export async function getPokedexById(id: string, search?: string) {
+  const params = new URLSearchParams();
 
-export async function getPokedexById(id: string | number) {
-  const res = await fetch(`${API_URL}/Pokedex/${id}`, {
+  if (search) params.set("search", search);
+
+  const url =
+    `${API_URL}/pokedex/${id}` +
+    (params.toString() ? `?${params.toString()}` : "");
+
+  const res = await fetch(url, {
     cache: "no-store",
   });
 
-  if (!res.ok) throw new Error("Pokedex não encontrada");
+  if (!res.ok) throw new Error("Erro ao buscar pokedex");
 
   return res.json();
 }
+

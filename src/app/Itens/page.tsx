@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import ItensList from "../components/Item/ItensList";
+import ItensList from "@/components/Item/ItensList";
 import { getItemPage } from "@/services/pokemonApi";
-import Spinner from "../components/loading/Spinner";
+import Spinner from "@/components/loading/Spinner";
 import type { ListItem } from "@/app/types/Item/item";
 
 // ─────────────────────────────────────────────
