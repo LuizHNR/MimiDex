@@ -41,14 +41,6 @@ export default function MoveFilters({ pokemonId, initialMoves }: Props) {
 
       {/* ===== BOTÕES ===== */}
       <div className="flex flex-wrap gap-2">
-        <button
-          onClick={() => handleFilter(null)}
-          className={`px-4 py-2 rounded ${
-            method === null ? "bg-white text-black" : "bg-zinc-700 text-white"
-          }`}
-        >
-          Todos
-        </button>
 
         {METHODS.map(m => (
           <button
