@@ -21,14 +21,14 @@ export default function PokemonCard({ numero, nome, sprite, tipos }: PokemonCard
     <Link href={`/pokemon/${numero}`} className="cursor-pointer">
       <div className={`${bgColor} text-white p-4 rounded-xl flex flex-col items-center gap-2 w-40 hover:scale-[1.03] transition`}>
         {sprite && (
-        <Image
-          src={sprite}
-          alt={nome}
-          width={120}
-          height={120}
-          className="pixelated"
-        />
-      )}
+          <Image
+            src={sprite}
+            alt={nome}
+            width={120}
+            height={120}
+            className="pixelated"
+          />
+        )}
 
 
         <h2 className="text-lg font-bold">{nome}</h2>

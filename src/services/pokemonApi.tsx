@@ -48,8 +48,19 @@ export async function getPokemonById(id: string | number) {
 }
 
 
-export async function getMovesPokemonById(id: string | number) {
-  const res = await fetch(`${API_URL}/Pokemon/${id}/Movimentos`, {
+export async function getMovesPokemonById(id: string | number, {method, types}: {
+  method?: string;
+  types?: string;
+}= {} 
+) {
+
+  const params = new URLSearchParams();
+
+  if (method) params.append("method", method);
+  if (types) params.append("types", types);
+
+
+  const res = await fetch(`${API_URL}/Pokemon/${id}/Movimentos?${params.toString()}`, {
     cache: "no-store",
   });
 

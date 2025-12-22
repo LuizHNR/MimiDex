@@ -11,7 +11,7 @@ export default function PokemonList({ items }: PokemonListProps) {
   const filtered = items.filter((p) => p.sprite?.front_default);
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 py-10">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 py-10 justify-items-center">
       {filtered.map((pokemon) => (
         <PokemonCard
           key={pokemon.numero}
